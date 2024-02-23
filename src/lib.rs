@@ -96,4 +96,32 @@ Trust me.";
             search_case_insensitive(query, contents)
         );
     }
+
+    #[test]
+    fn incorrect_file_path() {
+        let query = "rUsT";
+        let file_path = "nonexistent.txt";
+
+        let config = Config {
+            query: query.to_string(),
+            file_path: file_path.to_string(),
+            ignore_case: false,
+        };
+
+        assert!(run(config).is_err());
+    }
+
+    #[test]
+    fn correct_file_path() {
+        let query = "duct";
+        let file_path = "poem.txt";
+
+        let config = Config {
+            query: query.to_string(),
+            file_path: file_path.to_string(),
+            ignore_case: false,
+        };
+
+        assert!(run(config).is_ok());
+    }
 }

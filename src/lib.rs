@@ -124,4 +124,32 @@ Trust me.";
 
         assert!(run(config).is_ok());
     }
+
+    #[test]
+    fn correct_file_path_ignore_case() {
+        let query = "duct";
+        let file_path = "poem.txt";
+
+        let config = Config {
+            query: query.to_string(),
+            file_path: file_path.to_string(),
+            ignore_case: true,
+        };
+
+        assert!(run(config).is_ok());
+    }
+
+    #[test]
+    fn incorrect_file_path_ignore_case() {
+        let query = "rUsT";
+        let file_path = "nonexistent.txt";
+
+        let config = Config {
+            query: query.to_string(),
+            file_path: file_path.to_string(),
+            ignore_case: true,
+        };
+
+        assert!(run(config).is_err())
+    }
 }
